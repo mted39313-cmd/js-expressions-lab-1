@@ -1,22 +1,37 @@
-//! Start by creating the variables for the data recorded
-//* Then work on the conversion of the temperature from Celsius to Fahrenheit (or viceversa)
+// Sample 30-day temperature data (mix of Celsius 'C' and Fahrenheit 'F')
+// Replace this array with your actual 30-day dataset
+const temperatures = [
+  "22C", "72F", "21C", "68F", "23C", "75F", "20C", "19C", "65F", "24C",
+  "77F", "25C", "79F", "21C", "70F", "22C", "71F", "24C", "76F", "19C",
+  "66F", "23C", "74F", "20C", "69F", "25C", "80F", "22C", "73F", "21C"
+];
 
+let totalCelsius = 0;
+let daysCount = temperatures.length; // Should be 30
 
-//! Start the calculation of the total temperatures
-//* Then apply the conversion to calculate the total in the other unit of measurement
-//* Call the variables: tot_temperature_in_fahrenheit and tot_temperature_in_celsius
+// Using a basic for loop and arithmetic operators
+for (let i = 0; i < daysCount; i++) {
+  let currentTempStr = temperatures[i];
+  
+  // Extract the numeric value and the unit character
+  let unit = currentTempStr.slice(-1); // Gets 'C' or 'F'
+  let value = parseFloat(currentTempStr); // Extracts the number
+  
+  let tempInCelsius = 0;
+  
+  // Check the unit and convert if necessary using basic operators
+  if (unit === "F") {
+    tempInCelsius = (value - 32) * 5 / 9;
+  } else {
+    tempInCelsius = value;
+  }
+  
+  // Accumulate the total using basic assignment and addition
+  totalCelsius = totalCelsius + tempInCelsius;
+}
 
-//! Start the calculation of the average temperatures
-//* Call the variables: avg_temperature_in_fahrenheit and avg_temperature_in_celsius
+// Calculate the average temperature
+let averageCelsius = totalCelsius / daysCount;
 
-//! Console.log the results for your own inspection if you'd like
-
-//! After creating the four variables mentioned above, uncomment the following lines
-//* This way you can export them to the test file, this is essential for the tests to work
-
-module.exports = {
-    // tot_temperature_in_fahrenheit,
-    // tot_temperature_in_celsius,
-    // avg_temperature_in_fahrenheit,
-    // avg_temperature_in_celsius
-};
+console.log("Total Days Analyzed:", daysCount);
+console.log("Average Temperature (°C):", averageCelsius.toFixed(2));
